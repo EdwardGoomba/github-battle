@@ -1,12 +1,15 @@
-var React = require('react')
-var ReactDOM = require('react-dom')
+import React, { Component } from 'react'
+import ReactDOM from 'react-dom'
+
+import Saying from './components/Saying'
+
 require('./index.css')
 
-class App extends React.Component {
+class App extends Component {
   render() {
     return(
       <div>
-        Hello World!
+        <Saying message='Hello World! Eat More Doughnuts!'/>
       </div>
     )
   }
