@@ -2,7 +2,7 @@ var axios = require('axios')
 
 var id = 'YOUR_CLIENT_ID'
 var sec = 'YOUR_SECRET_ID'
-var params = '?client_id=' + id + '&client_secre=' + sec
+var params = '?client_id=' + id + '&client_secret=' + sec
 
 function getProfile (username) {
   return axios.get('https://api.github.com/users/' + username + params)
@@ -34,7 +34,7 @@ function handleError (error) {
 }
 
 function getUserData (player) {
-  axios.all([
+  return axios.all([
     getProfile(player),
     getRepos(player)
   ]).then(function (data) {
@@ -60,7 +60,6 @@ module.exports = {
       .then(sortPlayers)
       .catch(handleError)
   },
-
   fetchPopularRepos: function (language) {
     var encodedURI = window.encodeURI('https://api.github.com/search/repositories?q=stars:>1+language:' + language + '&sort=stars&order=desc&type=Repositories')
 
