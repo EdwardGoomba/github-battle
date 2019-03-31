@@ -1,35 +1,10 @@
 var React = require('react')
 var PropTypes = require('prop-types')
 var Link = require('react-router-dom').Link
-
-function PlayerPreview (props) {
-  return (
-    <div>
-      <div className='column'>
-        <img
-          className='avatar'
-          src={props.avatar}
-          alt={'Avatar for ' + props.username}
-        />
-        <h2 className='username'>@{props.username}</h2>
-      </div>
-      <button
-        className='reset'
-        onClick={props.onReset.bind(null, props.id)}>
-        Reset
-      </button>
-    </div>
-  )
-}
-
-PlayerPreview.propTypes = {
-  avatar: PropTypes.string.isRequired,
-  username: PropTypes.string.isRequired,
-  onReset: PropTypes.func.isRequired
-}
+import PlayerPreview from './PlayerPreview'
 
 class PlayerInput extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {
       username: ''
@@ -38,7 +13,7 @@ class PlayerInput extends React.Component {
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
-  handleChange (event) {
+  handleChange(event) {
     var value = event.target.value
 
     this.setState(function () {
@@ -48,7 +23,7 @@ class PlayerInput extends React.Component {
     })
   }
 
-  handleSubmit (event) {
+  handleSubmit(event) {
     event.preventDefault()
 
     this.props.onSubmit(
@@ -57,7 +32,7 @@ class PlayerInput extends React.Component {
     )
   }
 
-  render () {
+  render() {
     return (
       <form className='column' onSubmit={this.handleSubmit}>
         <label className='header' htmlFor='username'>{this.props.label}</label>
@@ -91,7 +66,7 @@ PlayerInput.defaultProps = {
 }
 
 class Battle extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {
       playerOneName: '',
@@ -104,7 +79,7 @@ class Battle extends React.Component {
     this.handleReset = this.handleReset.bind(this)
   }
 
-  handleSubmit (id, username) {
+  handleSubmit(id, username) {
     this.setState(function () {
       var newState = {}
       newState[id + 'Name'] = username
@@ -113,7 +88,7 @@ class Battle extends React.Component {
     })
   }
 
-  handleReset (id) {
+  handleReset(id) {
     this.setState(function () {
       var newState = {}
       newState[id + 'Name'] = ''
@@ -122,7 +97,7 @@ class Battle extends React.Component {
     })
   }
 
-  render () {
+  render() {
     var match = this.props.match
     var playerOneName = this.state.playerOneName
     var playerOneImage = this.state.playerOneImage
@@ -143,9 +118,14 @@ class Battle extends React.Component {
             <PlayerPreview
               avatar={playerOneImage}
               username={playerOneName}
-              onReset={this.handleReset}
-              id='playerOne'
-            />}
+            >
+              <button
+                className='reset'
+                onClick={this.handleReset.bind(null, 'playerOne')}>
+                Reset
+              </button>
+            </PlayerPreview>
+          }
 
           {!playerTwoName &&
             <PlayerInput
@@ -158,9 +138,14 @@ class Battle extends React.Component {
             <PlayerPreview
               avatar={playerTwoImage}
               username={playerTwoName}
-              onReset={this.handleReset}
-              id='playerTwo'
-            />}
+            >
+              <button
+                className='reset'
+                onClick={this.handleReset.bind(null, 'playerTwo')}>
+                Reset
+              </button>
+            </PlayerPreview>
+          }
         </div>
 
         {playerOneImage && playerTwoImage &&
@@ -177,4 +162,4 @@ class Battle extends React.Component {
   }
 }
 
-module.exports = Battle
+export default Battle
