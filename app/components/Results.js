@@ -2,11 +2,26 @@ import React, { Component } from 'react'
 import queryString from 'query-string'
 import { Link } from 'react-router-dom'
 import api from '../../utils/api'
+var PropTypes = require('prop-types')
+
+function Player(props) {
+  return (
+    <div>
+      <h1 className='header'>{props.label}</h1>
+      <h3 style={{ textAlign: 'center' }}>Score: {props.score}</h3>
+    </div>
+  )
+}
+
+Player.propTypes = {
+  label: PropTypes.string.isRequired,
+  score: PropTypes.number.isRequired,
+  profile: PropTypes.object.isRequired,
+}
 
 class Results extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
-
     this.state = {
       winner: null,
       looser: null,
@@ -15,7 +30,8 @@ class Results extends Component {
     }
   }
 
-  componentDidMount () {
+
+  componentDidMount() {
     var players = queryString.parse(this.props.location.search)
 
     api.battle([
@@ -42,10 +58,10 @@ class Results extends Component {
     }.bind(this))
   }
 
-  render () {
+  render() {
     var error = this.state.error
     var winner = this.state.winner
-    var looser = this.state.looser
+    var loser = this.state.looser
     var loading = this.state.loading
 
     if (loading === true) {
@@ -61,9 +77,18 @@ class Results extends Component {
       )
     }
     return (
-      <div>
+      <div className='row'>
         <h2>Results</h2>
-        {JSON.stringify(this.state, null, 2)}
+        <Player
+          label='Winner'
+          score={winner.score}
+          profile={winner.profile}
+        />
+        <Player
+          label='Loser'
+          score={loser.score}
+          profile={loser.profile}
+        />
       </div>
 
     )
