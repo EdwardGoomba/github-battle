@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import api from '../../utils/api'
+import Loading from './Loading'
 
-function SelectedLanguage (props) {
+function SelectedLanguage(props) {
   var languages = ['All', 'JavaScript', 'Ruby', 'Java', 'CSS', 'Python']
   return (
     <ul className='languages'>
-      { languages.map(function (lang) {
+      {languages.map(function (lang) {
         return (
           <li
             style={lang === props.selectedLanguage ? { color: '#d0021b' } : null}
@@ -20,7 +21,7 @@ function SelectedLanguage (props) {
   )
 }
 
-function RepoGrid (props) {
+function RepoGrid(props) {
   return (
     <ul className='popular-list'>
       {props.repos.map(function (repo, index) {
@@ -58,7 +59,7 @@ SelectedLanguage.propTypes = {
 }
 
 class Popular extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {
       selectedLanguage: 'All',
@@ -68,11 +69,11 @@ class Popular extends Component {
     this.updateLanguage = this.updateLanguage.bind(this)
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.updateLanguage(this.state.selectedLanguage)
   }
 
-  updateLanguage (lang) {
+  updateLanguage(lang) {
     this.setState(function () {
       return {
         selectedLanguage: lang,
@@ -90,14 +91,14 @@ class Popular extends Component {
       }.bind(this))
   }
 
-  render () {
+  render() {
     return (
       <div>
         <SelectedLanguage
           selectedLanguage={this.state.selectedLanguage}
           onSelect={this.updateLanguage}
         />
-        {!this.state.repos ? <p>LOADING</p> : <RepoGrid repos={this.state.repos} /> }
+        {!this.state.repos ? <Loading /> : <RepoGrid repos={this.state.repos} />}
       </div>
     )
   }
