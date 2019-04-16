@@ -1,5 +1,5 @@
 import React from 'react'
-const NavLink = require('react-router-dom').NavLink
+import { NavLink } from 'react-router-dom'
 
 const Nav = () => {
   return (

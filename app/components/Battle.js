@@ -1,6 +1,6 @@
-const React = require('react')
-const PropTypes = require('prop-types')
-const Link = require('react-router-dom').Link
+import React from 'react'
+import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 import PlayerPreview from './PlayerPreview'
 
 class PlayerInput extends React.Component {

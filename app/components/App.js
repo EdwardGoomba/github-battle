@@ -6,13 +6,10 @@ import Battle from './Battle'
 import Popular from './Popular'
 import Results from './Results'
 
-const ReactRouter = require('react-router-dom')
-const Router = ReactRouter.BrowserRouter
-const Route = ReactRouter.Route
-const Switch = ReactRouter.Switch
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 class App extends Component {
-  render () {
+  render() {
     return (
       <Router>
         <div className='container'>
@@ -22,9 +19,7 @@ class App extends Component {
             <Route exact path='/battle' component={Battle} />
             <Route path='/battle/results' component={Results} />
             <Route path='/popular' component={Popular} />
-            <Route render={function () {
-              return <p>Not Found</p>
-            }} />
+            <Route render={() => <p>Not Found</p>} />
           </Switch>
         </div>
       </Router>

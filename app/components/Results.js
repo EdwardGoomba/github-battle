@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import queryString from 'query-string'
 import { Link } from 'react-router-dom'
-import api from '../../utils/api'
+import { battle } from '../../utils/api'
 import PropTypes from 'prop-types'
 import PlayerPreview from './PlayerPreview'
 import Loading from './Loading'
@@ -9,8 +9,8 @@ import Loading from './Loading'
 function Profile({ info }) {
   return (
     <PlayerPreview
-      avatar={avatar_url}
-      username={login}
+      avatar={info.avatar_url}
+      username={info.login}
     >
       <ul className='space-list-items'>
         {info.name && <li>{info.name}</li>}
@@ -58,11 +58,11 @@ class Results extends Component {
 
 
   componentDidMount() {
-    const { playerOneName, playerOneName } = queryString.parse(this.props.location.search)
+    const { playerOneName, playerTwoName } = queryString.parse(this.props.location.search)
 
-    api.battle([
+    battle([
       playerOneName,
-      playerOneName
+      playerTwoName
     ]).then((results) => {
       if (results === null) {
         return this.setState(() => ({
@@ -75,7 +75,7 @@ class Results extends Component {
       this.setState(() => ({
         error: null,
         winner: results[0],
-        looser: results[1],
+        loser: results[1],
         loading: false
       }
       ))
