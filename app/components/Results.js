@@ -46,14 +46,11 @@ Player.propTypes = {
 }
 
 class Results extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      winner: null,
-      looser: null,
-      error: null,
-      loading: true
-    }
+  state = {
+    winner: null,
+    looser: null,
+    error: null,
+    loading: true
   }
 
 
