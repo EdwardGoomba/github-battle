@@ -1,6 +1,6 @@
 {
   "name": "github-battle",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "index.js",
   "babel": {
     "presets": [
@@ -10,29 +10,33 @@
   },
   "scripts": {
     "start": "webpack-dev-server --open",
-    "build": "NODE_ENV='production' webpack"
+    "build": "NODE_ENV='production' webpack",
+    "firebase-init": "firebase login && firebase init",
+    "deploy": "yarn build && firebase deploy"
   },
   "author": "EdwardGoomba",
   "license": "MIT",
   "dependencies": {
+    "@babel/polyfill": "^7.4.3",
     "axios": "^0.18.0",
-    "query-string": "^6.2.0",
+    "query-string": "^6.4.2",
     "react": "^16.8.6",
-    "react-dom": "^16.6.0",
-    "react-router-dom": "^4.3.1",
+    "react-dom": "^16.8.6",
+    "react-router-dom": "^5.0.0",
     "standard": "^12.0.1",
-    "styled-components": "^4.0.3"
+    "styled-components": "^4.2.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.1.2",
-    "@babel/preset-env": "^7.1.0",
+    "@babel/core": "^7.4.3",
+    "@babel/preset-env": "^7.4.3",
     "@babel/preset-react": "^7.0.0",
-    "babel-loader": "^8.0.4",
-    "css-loader": "^1.0.0",
+    "babel-loader": "^8.0.5",
+    "css-loader": "^2.1.1",
+    "firebase-tools": "^6.6.0",
     "html-webpack-plugin": "^3.2.0",
     "style-loader": "^0.23.1",
-    "webpack": "^4.23.1",
-    "webpack-cli": "^3.1.2",
-    "webpack-dev-server": "^3.1.10"
+    "webpack": "^4.30.0",
+    "webpack-cli": "^3.3.0",
+    "webpack-dev-server": "^3.3.1"
   }
 }
